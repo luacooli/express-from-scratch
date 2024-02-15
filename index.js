@@ -28,7 +28,6 @@ app.get('/users', (req, res) => {
       status: true,
     },
   ])
-  res.send('List of all users')
 })
 
 app.listen(port, () => {

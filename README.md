@@ -4,7 +4,7 @@
 
 Create a simple users CRUD API using Express.js framework from scratch without any libraries, frameworks or using any course support.
 
-## TODO
+### TODO
 
 - create initial setup
 - update readme to get in instructions on how to run the project
@@ -16,20 +16,7 @@ Create a simple users CRUD API using Express.js framework from scratch without a
   - PUT `/users/:userId`
   - DELETE `/users/:userId`
 
-### User entity
-
-```typescript
-type UserType = {
-  _id: string
-  name: string
-  email: string
-  commits: number
-  birthdate: Date
-  status: boolean
-}
-```
-
-## Steps to start aplication
+## Steps to start the application
 
 ### install dependencies
 
@@ -43,4 +30,17 @@ npm install
 ```
 
 npm run dev
+```
+
+#### User entity
+
+```typescript
+type UserType = {
+  _id: string
+  name: string
+  email: string
+  commits: number
+  birthdate: Date
+  status: boolean
+}
 ```

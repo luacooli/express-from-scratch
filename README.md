@@ -15,7 +15,6 @@ Create a simple users CRUD API using Express.js framework from scratch without a
   - POST `/users`
   - PUT `/users/:userId`
   - DELETE `/users/:userId`
-- consumir do front
 
 ## Steps to start the application
 

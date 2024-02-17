@@ -37,17 +37,14 @@ const users = [
 ]
 
 app.get('/users', (req, res) => {
-  console.log('Users list')
   res.status(200).json(users)
 })
 
 app.get('/users/:userId', (req, res) => {
-  console.log(`User ${req.params.userId}`)
   res.status(200).json(users[req.params.userId])
 })
 
 app.post('/users', (req, res) => {
-  console.log(users)
   const newUser = {
     _id: users[users.length - 1]._id + 1,
     name: 'Lua' + Math.floor(Math.random() * (100 - 1)),
@@ -58,14 +55,12 @@ app.post('/users', (req, res) => {
   }
 
   users.push(newUser)
-  console.log(users)
+
   res.status(201).json(users)
 })
 
 app.put('/users/:userId', (req, res) => {
   const userId = req.params.userId
-
-  console.log(userId)
 
   if (!users[userId]) {
     res

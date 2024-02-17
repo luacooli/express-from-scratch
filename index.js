@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 
 const users = [
   {
-    id: 0,
+    _id: 0,
     name: 'José',
     email: 'jose@email.com',
     commits: 150,
@@ -19,7 +19,7 @@ const users = [
     status: true,
   },
   {
-    id: 1,
+    _id: 1,
     name: 'Maria',
     email: 'maria@email.com',
     commits: 100,
@@ -27,7 +27,7 @@ const users = [
     status: true,
   },
   {
-    id: 2,
+    _id: 2,
     name: 'Pedro',
     email: 'pedro@email.com',
     commits: 80,
@@ -47,17 +47,18 @@ app.get('/users/:userId', (req, res) => {
 })
 
 app.post('/users', (req, res) => {
+  console.log(users)
   const newUser = {
-    _id: 3,
-    name: 'Lua',
-    email: 'lua@email.com',
-    commits: 130,
-    birthdate: '2000-09-13',
+    _id: users[users.length - 1]._id + 1,
+    name: 'Lua' + Math.floor(Math.random() * (100 - 1)),
+    email: `lua${Math.floor(Math.random() * (100 - 1))}@email.com`,
+    commits: Math.floor(Math.random() * (1000 - 1)),
+    birthdate: new Date(),
     status: true,
   }
 
   users.push(newUser)
-
+  console.log(users)
   res.status(201).json(users)
 })
 
@@ -67,7 +68,9 @@ app.put('/users/:userId', (req, res) => {
   console.log(userId)
 
   if (!users[userId]) {
-    res.status(400).send(`User id doens't exist - userId: ${req.params.userId}`)
+    res
+      .status(400)
+      .send(`User id doens't exist - user_Id: ${req.params.userId}`)
   } else {
     users[userId] = {
       _id: userId,

@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+app.use(express.json()) // body-parsing middleware for parsing application/json and populate req.body
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
   res.json({
@@ -45,14 +47,7 @@ app.get('/users/:userId', (req, res) => {
 })
 
 app.post('/users', (req, res) => {
-  const newUser = {
-    _id: users[users.length - 1]._id + 1,
-    name: 'Lua' + Math.floor(Math.random() * (100 - 1)),
-    email: `lua${Math.floor(Math.random() * (100 - 1))}@email.com`,
-    commits: Math.floor(Math.random() * (1000 - 1)),
-    birthdate: new Date(),
-    status: true,
-  }
+  const newUser = req.body
 
   users.push(newUser)
 

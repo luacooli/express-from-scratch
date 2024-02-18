@@ -1,0 +1,25 @@
+{
+  "User": {
+    "type": "object",
+    "properties": {
+      "_id": {
+        "type": "integer"
+      },
+      "name": {
+        "type": "string"
+      },
+      "email": {
+        "type": "string"
+      },
+      "commits": {
+        "type": "integer"
+      },
+      "birthdate": {
+        "type": "date"
+      },
+      "status": {
+        "type": "boolean"
+      }
+    }
+  }
+}

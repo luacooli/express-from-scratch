@@ -1,12 +1,13 @@
 const express = require('express')
+const { spec, swaggerUI } = require('./swaggerConfig')
 const app = express()
-
 const port = 3000
+
+app.use(express.json()) // middleware for parsing application/json and populate req.body
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(spec))
 
 const UsersService = require('./users.service')
 const users = new UsersService()
-
-app.use(express.json()) // middleware for parsing application/json and populate req.body
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

@@ -6,7 +6,7 @@ const port = 3000
 const UsersService = require('./users.service')
 const users = new UsersService()
 
-app.use(express.json()) // body-parsing middleware for parsing application/json and populate req.body
+app.use(express.json()) // middleware for parsing application/json and populate req.body
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

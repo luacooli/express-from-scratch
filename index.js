@@ -14,51 +14,67 @@ app.get('/', (req, res) => {
 })
 
 app.get('/users', (req, res) => {
-  res.status(200).json(users.getUsers())
+  try {
+    res.status(200).json(users.getUsers())
+  } catch (error) {
+    res.status(400).send('Bad request')
+  }
 })
 
 app.get('/users/:userId', (req, res) => {
-  const userId = parseInt(req.params.userId)
+  try {
+    const userId = parseInt(req.params.userId)
+    const user = users.getUserById(userId)
 
-  const user = users.getUserById(userId)
-
-  if (user) {
-    res.status(200).json(user)
-  } else {
-    res.status(404).send('Usuário não encontrado')
+    if (user) {
+      res.status(200).json(user)
+    } else {
+      res.status(404).send('Usuário não encontrado')
+    }
+  } catch (error) {
+    res.status(400).send('Bad request')
   }
 })
 
 app.post('/users', (req, res) => {
-  const newUser = req.body
+  try {
+    const newUser = req.body
+    const user = users.createUser(newUser)
 
-  const user = users.createUser(newUser)
-
-  res.status(201).json(user)
+    res.status(201).json(user)
+  } catch (error) {
+    res.status(400).send('Bad request')
+  }
 })
 
 app.put('/users/:userId', (req, res) => {
-  const userId = parseInt(req.params.userId)
-  const userData = req.body
+  try {
+    const userId = parseInt(req.params.userId)
+    const userData = req.body
+    const user = users.updateUser(userId, userData)
 
-  const user = users.updateUser(userId, userData)
-
-  if (user) {
-    res.status(200).json(user)
-  } else {
-    res.json(users)
+    if (user) {
+      res.status(200).json(user)
+    } else {
+      res.json(users)
+    }
+  } catch (error) {
+    res.status(400).send('Bad request')
   }
 })
 
 app.delete('/users/:userId', (req, res) => {
-  const userId = parseInt(req.params.userId)
+  try {
+    const userId = parseInt(req.params.userId)
+    const usersFiltered = users.deleteUser(userId)
 
-  const usersFiltered = users.deleteUser(userId)
-
-  if (usersFiltered) {
-    res.status(200).send('Usuário deletado com sucesso!')
-  } else {
-    res.status(404).send('Usuário não encontrado')
+    if (usersFiltered) {
+      res.status(200).send('Usuário deletado com sucesso!')
+    } else {
+      res.status(404).send('Usuário não encontrado')
+    }
+  } catch (error) {
+    res.status(400).send('Bad request')
   }
 })
 

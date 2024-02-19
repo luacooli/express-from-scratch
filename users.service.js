@@ -32,8 +32,6 @@ class UsersService {
       this.users[userIndex] = { ...this.users[userIndex], ...body }
 
       return this.users[userIndex]
-    } else {
-      throw new Error('Usuário não encontrado')
     }
   }
 
@@ -42,8 +40,6 @@ class UsersService {
 
     if (userIndex !== -1) {
       return this.users.filter((user) => user.id !== userId)
-    } else {
-      throw new Error('Usuário não encontrado')
     }
   }
 }

@@ -45,3 +45,5 @@ npm install
 
 npm run dev
 ```
+### Swagger UI
+access (http://localhost:3000/docs) to view routes on swagger

@@ -1,6 +1,6 @@
 let users = [
   {
-    _id: 0,
+    id: 0,
     name: 'José',
     email: 'jose@email.com',
     commits: 150,
@@ -8,7 +8,7 @@ let users = [
     status: true,
   },
   {
-    _id: 1,
+    id: 1,
     name: 'Maria',
     email: 'maria@email.com',
     commits: 100,
@@ -16,7 +16,7 @@ let users = [
     status: true,
   },
   {
-    _id: 2,
+    id: 2,
     name: 'Pedro',
     email: 'pedro@email.com',
     commits: 80,

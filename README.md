@@ -21,7 +21,7 @@ Create a simple users CRUD API using Express.js framework from scratch without a
 
 ```typescript
 type UserType = {
-  _id: string
+  id: string
   name: string
   email: string
   commits: number

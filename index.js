@@ -7,7 +7,7 @@ app.use(express.json()) // middleware for parsing application/json and populate 
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(spec))
 
 const UsersService = require('./service/users.service')
-const users = new UsersService()
+const usersService = new UsersService()
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -17,12 +17,12 @@ app.get('/users', (req, res) => {
   const { name, email } = req.query
 
   try {
-    if (name) {
-      const usersFilteres = users.findWhere(name)
+    if (name || email) {
+      const usersFilteres = usersService.findWhere(name, email)
 
       res.status(200).json(usersFilteres)
     } else {
-      res.status(200).json(users.getUsers())
+      res.status(200).json(usersService.getUsers())
     }
   } catch (error) {
     res.status(400).send('Bad request')
@@ -32,7 +32,7 @@ app.get('/users', (req, res) => {
 app.get('/users/:userId', (req, res) => {
   try {
     const userId = parseInt(req.params.userId)
-    const user = users.getUserById(userId)
+    const user = usersService.getUserById(userId)
 
     if (user) {
       res.status(200).json(user)
@@ -47,7 +47,7 @@ app.get('/users/:userId', (req, res) => {
 app.post('/users', (req, res) => {
   try {
     const newUser = req.body
-    const user = users.createUser(newUser)
+    const user = usersService.createUser(newUser)
 
     res.status(201).json(user)
   } catch (error) {
@@ -59,7 +59,7 @@ app.put('/users/:userId', (req, res) => {
   try {
     const userId = parseInt(req.params.userId)
     const userData = req.body
-    const user = users.updateUser(userId, userData)
+    const user = usersService.updateUser(userId, userData)
 
     if (user) {
       res.status(200).json(user)
@@ -74,7 +74,7 @@ app.put('/users/:userId', (req, res) => {
 app.delete('/users/:userId', (req, res) => {
   try {
     const userId = parseInt(req.params.userId)
-    const usersFiltered = users.deleteUser(userId)
+    const usersFiltered = usersService.deleteUser(userId)
 
     if (usersFiltered) {
       res.status(200).send('Usuário deletado com sucesso!')

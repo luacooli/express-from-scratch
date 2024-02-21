@@ -15,9 +15,15 @@ class UsersService {
     return user
   }
 
-  findWhere(name) {
+  findWhere(name, email) {
+    const n = name ? name.toLowerCase() : ''
+    const e = email ? email.toLowerCase() : ''
+
     return this.users.filter((user) => {
-      return user.name.toLowerCase().includes(name.toLowerCase())
+      return (
+        user.name.toLowerCase().includes(n) &&
+        user.email.toLowerCase().includes(e)
+      )
     })
   }
 
@@ -37,6 +43,8 @@ class UsersService {
 
       return this.users[userIndex]
     }
+
+    return null
   }
 
   deleteUser(userId) {
@@ -45,6 +53,8 @@ class UsersService {
     if (userIndex !== -1) {
       return this.users.filter((user) => user.id !== userId)
     }
+
+    return null
   }
 }
 

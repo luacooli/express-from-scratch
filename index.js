@@ -6,7 +6,7 @@ const port = 3000
 app.use(express.json()) // middleware for parsing application/json and populate req.body
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(spec))
 
-const UsersService = require('./users.service')
+const UsersService = require('./service/users.service')
 const users = new UsersService()
 
 app.get('/', (req, res) => {
@@ -14,8 +14,16 @@ app.get('/', (req, res) => {
 })
 
 app.get('/users', (req, res) => {
+  const { name, email } = req.query
+
   try {
-    res.status(200).json(users.getUsers())
+    if (name) {
+      const usersFilteres = users.findWhere(name)
+
+      res.status(200).json(usersFilteres)
+    } else {
+      res.status(200).json(users.getUsers())
+    }
   } catch (error) {
     res.status(400).send('Bad request')
   }

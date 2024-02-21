@@ -1,4 +1,4 @@
-let users = require('./usersList')
+let users = require('../usersList')
 
 class UsersService {
   constructor() {
@@ -13,6 +13,12 @@ class UsersService {
     const user = this.users.find((user) => user.id === userId)
 
     return user
+  }
+
+  findWhere(name) {
+    return this.users.filter((user) => {
+      return user.name.toLowerCase().includes(name.toLowerCase())
+    })
   }
 
   createUser(newUser) {
